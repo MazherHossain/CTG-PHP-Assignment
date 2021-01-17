@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Assignment 8</title>
+  <!--Ques:চিন্তা করে ফর লুপ ব্যবহার কারে ২,৩,৪,৫ এর নামতা বের করুন-->
 </head>
 <body>
 
