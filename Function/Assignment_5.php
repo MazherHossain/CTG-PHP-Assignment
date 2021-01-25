@@ -15,7 +15,7 @@
     function heading($header, $tag='h2', $align='center', $color='red', $font='Arial'){
       echo "<$tag style='text-align:$align; color:$color; font-family:$font'>$header</$tag>";
     }
-    heading('hello everyone','h1','center','green',,'Broadway');
+    heading('hello everyone','h1','center','green','Broadway');
   ?>
 </body>
 </html>
