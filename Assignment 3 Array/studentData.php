@@ -44,7 +44,7 @@
         'location'=>'Mirpur'
       ],
       [
-        'name' => 'Celena',
+        'name' => 'Celina',
         'age'  => '10',
         'cell' => '01712345606',
         'location'=>'Banani'
@@ -138,10 +138,10 @@
     foreach($students as $student){
 
       if($student['location']=='Banani' or $student['location']=='Mirpur'){
-        echo "Name = ".$student['name']."<br>";
+        echo "Student Name = ".$student['name']."<br>";
         echo "Age  = ".$student['age']."<br>";
         echo "Cell phone = ".$student['cell']."<br>";
-        echo "Location = ".$student['location']."<hr>";
+        echo "Student address = ".$student['location']."<hr>";
       }
       else{
         echo "Invalid output";
