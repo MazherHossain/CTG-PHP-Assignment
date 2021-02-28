@@ -22,32 +22,43 @@
 </head>
 <body>
 
-    <div class="wrap shadow box">
+  <?php
+    if(isset($_POST['insert'])){
+      echo $name = $_POST['name'].'<br>';
+      echo $email = $_POST['email'].'<br>';
+      echo $cell = $_POST['cell'].'<br>';
+      echo $age = $_POST['age'].'<br>';
+    }
+  ?>
+
+    <div class="box mx-auto mt-5">
+    <div class="wrap shadow">
       <div class="card">
-        <div class="card-body bd">
+        <div class="card-body">
           <h2>Sign in</h2>
-          <form action="">
+          <form action="" method="POST">
             <div class="form-group">
               <label for="">Name</label>
-              <input class="form-control" type="text">
+              <input name="name" class="form-control" type="text">
             </div>
             <div class="form-group">
               <label for="">Email</label>
-              <input class="form-control" type="text">
+              <input name="email" class="form-control" type="text">
             </div>
             <div class="form-group">
               <label for="">Cell</label>
-              <input class="form-control" type="text">
+              <input name="cell" class="form-control" type="text">
             </div>
             <div class="form-group">
               <label for="">Age</label>
-              <input class="form-control" type="text">
+              <input name="age" class="form-control" type="text">
             </div>
             <div class="form-group mt-5">
-              <input class="btn btn-primary" type="submit" value="Sign In">
+              <input name="insert" class="btn btn-primary" type="submit" value="Sign In">
             </div>
         </div>
       </div>
+    </div>
     </div>
   
   <script src="assets/js/jquery-3.5.1.min.js"></script>
