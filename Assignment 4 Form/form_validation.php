@@ -29,6 +29,9 @@
       $cell = $_POST['cell'];
       $age = $_POST['age'];
 
+      $email_arr = explode('@', $email);//email exploding
+      $spec_mail = end($email_arr);
+
       if(empty($name)){
         $err['name'] = "<p style='color:red;'> *required </p>";
       }
@@ -51,9 +54,12 @@
       else if(filter_var($email, FILTER_VALIDATE_EMAIL) == false){
         $msg = " <p class='alert alert-warning alert-dismissible fade show' role='alert'>Invalid Email Address! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";
       }
+      else if($spec_mail != 'yahoo.com'){
+        $msg = " <p class='alert alert-warning alert-dismissible fade show' role='alert'>The Email Address must be of Yahoo! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";
+      }
       else
-       $msg = "<p class='alert alert-success alert-dismissible fade show' role='alert'>You're good to go! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";
-    }
+        $msg = "<p class='alert alert-success alert-dismissible fade show' role='alert'>You're good to go! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";
+      }
   ?>
 
     <div class="box mx-auto mt-5">
