@@ -48,6 +48,9 @@
         $msg = " <p class='alert alert-danger alert-dismissible fade show' role='alert'>All information are required! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";
 
       }
+      else if(filter_var($email, FILTER_VALIDATE_EMAIL) == false){
+        $msg = " <p class='alert alert-warning alert-dismissible fade show' role='alert'>Invalid Email Address! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";
+      }
       else
        $msg = "<p class='alert alert-success alert-dismissible fade show' role='alert'>You're good to go! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";
     }
