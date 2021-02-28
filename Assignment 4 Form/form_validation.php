@@ -24,29 +24,42 @@
 
   <?php
     if(isset($_POST['insert'])){
-      echo $name = $_POST['name'].'<br>';
-      echo $email = $_POST['email'].'<br>';
-      echo $cell = $_POST['cell'].'<br>';
-      echo $age = $_POST['age'].'<br>';
+      $name = $_POST['name'];
+      $email = $_POST['email'];
+      $cell = $_POST['cell'];
+      $age = $_POST['age'];
+
+      if( empty($name) || empty($email) || empty($cell) || empty($age) ){
+
+        $msg = " <p class='alert alert-danger alert-dismissible fade show' role='alert'>All information are required! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";
+
+      }
+      else
+       $msg = "<p class='alert alert-success alert-dismissible fade show' role='alert'>You're good to go! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";
     }
   ?>
 
     <div class="box mx-auto mt-5">
     <div class="wrap shadow">
-      <div class="card">
+      <div class="card bg-info text-light">
         <div class="card-body">
           <h2>Sign in</h2>
+          <?php
+            if(isset($msg)){
+              echo $msg;
+            }
+          ?>
           <form action="" method="POST">
-            <div class="form-group">
+            <div class="form-group mb-4">
               <label for="">Name</label>
               <input name="name" class="form-control" type="text">
             </div>
-            <div class="form-group">
+            <div class="form-group mb-4">
               <label for="">Email</label>
               <input name="email" class="form-control" type="text">
             </div>
-            <div class="form-group">
-              <label for="">Cell</label>
+            <div class="form-group mb-4">
+              <label for="">Phone Number</label>
               <input name="cell" class="form-control" type="text">
             </div>
             <div class="form-group">
@@ -54,7 +67,7 @@
               <input name="age" class="form-control" type="text">
             </div>
             <div class="form-group mt-5">
-              <input name="insert" class="btn btn-primary" type="submit" value="Sign In">
+              <input name="insert" class="btn btn-dark" type="submit" value="Sign In">
             </div>
         </div>
       </div>
