@@ -25,7 +25,10 @@
       $file_tmpname = $file['tmp_name'];//Getting file info
       $file_size = $file['size'];//Getting file info
 
-      move_uploaded_file($file_tmpname, 'photos/'.$file_name);//Uploading and storing files in a folder
+      $unique_name_added = time().rand(1,100);
+      $unique_name = md5($unique_name_added).$file_name;
+
+      move_uploaded_file($file_tmpname, 'photos/'.$unique_name);//Uploading and storing files in a folder
     }
   ?>
 
