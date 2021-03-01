@@ -124,7 +124,7 @@
               ?>
             </div>
             <div class="form-group mt-2">
-              <input name="insert" class="btn btn-dark" type="submit" value="Sign In">
+              <input name="insert" style="cursor:pointer" class="btn btn-outline-dark" type="submit" value="Sign In">
             </div>
         </div>
       </div>
