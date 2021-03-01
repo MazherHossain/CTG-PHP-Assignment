@@ -13,6 +13,7 @@
     #Email Validation
     #Specific Email Validation
     #Phone number validation
+    #Age 18-40
   -->
 
 
@@ -58,7 +59,7 @@
       else if(filter_var($email, FILTER_VALIDATE_EMAIL) == false){
         $msg = " <p class='alert alert-warning alert-dismissible fade show' role='alert'>Invalid Email Address! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";//Email validation warning
       }
-      else if($cell>8801999999999 || $cell<01300000000){
+      else if($cell>19999999999 || $cell<01300000000){
         $msg = " <p class='alert alert-danger alert-dismissible fade show' role='alert'>Invalid phone number input data type! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";//warning for not entering integer value as phone number
       }
       else if(in_array($cell_start, ['017','018','019','015','013','016','014'])==false){
@@ -122,7 +123,7 @@
                 }
               ?>
             </div>
-            <div class="form-group mt-5">
+            <div class="form-group mt-2">
               <input name="insert" class="btn btn-dark" type="submit" value="Sign In">
             </div>
         </div>
