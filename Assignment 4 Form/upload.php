@@ -20,15 +20,35 @@
 <body>
   <?php
     if(isset($_POST['upload'])){
-      $file = $_FILES['profile_photo'];//Getting file info
-      $file_name = $file['name'];//Getting file info
-      $file_tmpname = $file['tmp_name'];//Getting file info
-      $file_size = $file['size'];//Getting file info
+      $file = $_FILES['profile_photo'];//Getting the uploaded file info
+      $file_name = $file['name'];//Getting the uploaded file info
+      $file_tmpname = $file['tmp_name'];//Getting the uploaded file info
+      $file_size = $file['size'];//Getting the uploaded file info
+
+      //files show their size via bites
+      $size_in_kb = $file_size/1024; //as we know, 1024b = 1kb
+
+      $file_endpart = explode('.', $file_name);//Extracting the format
+      $extension = end($file_endpart);//Extracted the format
 
       $unique_name_added = time().rand(1,100);
-      $unique_name = md5($unique_name_added).$file_name;
+      $unique_name = md5($unique_name_added).".".$extension;//Adding unique name to the file
 
-      move_uploaded_file($file_tmpname, 'photos/'.$unique_name);//Uploading and storing files in a folder
+      //File validation
+      if(empty($file_name)){
+        $msg = " <p class='alert alert-warning alert-dismissible fade show' role='alert'>Select a file first! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";
+      }
+      else if(in_array($extension, ['jpg','png','gif','jpeg','webp'])==false){
+        $msg = " <p class='alert alert-danger alert-dismissible fade show' role='alert'>Invalid file format! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";
+      }
+      else if($size_in_kb > 500){
+        $msg = " <p class='alert alert-info alert-dismissible fade show' role='alert'>File size too big! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";
+      }
+      else{
+        move_uploaded_file($file_tmpname, 'photos/'.$unique_name);//Uploading and storing files in a folder
+        $msg = " <p class='alert alert-success alert-dismissible fade show' role='alert'>File Upload Successful! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";
+      }
+      
     }
   ?>
 
@@ -36,8 +56,16 @@
     <div class="wrap-shadow">
       <div class="card">
         <div class="card-body">
+          <?php
+            if(isset($msg)){
+              echo $msg;//It is important to add this extension here to show the messages
+            }
+          ?>
         <form action="" method="POST" enctype="multipart/form-data">
           <div class="form-group">
+            <div class="form-group">
+              <img style="width: 100px;" id="preview" src="" alt=""><!--Preview-->
+            </div>
             <label for="file_upload"><h4 style="cursor:pointer" data-toggle="tooltip" title="Profile Photo" class="pic"><i class="fas fa-images"></i></h4></label><!--Upload Icon-->
             <input name="profile_photo" style="display:none" type="file" id="file_upload">
           </div>
