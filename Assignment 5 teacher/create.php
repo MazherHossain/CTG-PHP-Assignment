@@ -1,3 +1,7 @@
+<?php
+include_once "autoload.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,10 +28,6 @@
 <body>
 
   <?php
-
-  $connection = new mysqli('localhost','root',''); 
-  $sql = "CREATE DATABASE teacher";
-  $connection -> query($sql);
 
     if(isset($_POST['insert'])){
       $name = $_POST['name'];
@@ -64,28 +64,29 @@
       else if(filter_var($email, FILTER_VALIDATE_EMAIL) == false){
         $msg = " <p class='alert alert-warning alert-dismissible fade show' role='alert'>Invalid Email Address! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";//Email validation warning
       }
-      else if($cell>19999999999 || $cell<01300000000){
-        $msg = " <p class='alert alert-danger alert-dismissible fade show' role='alert'>Invalid phone number input data type! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";//warning for not entering integer value as phone number
-      }
       else if(in_array($cell_start, ['017','018','019','015','013','016','014'])==false){
         $msg = " <p class='alert alert-warning alert-dismissible fade show' role='alert'>Invalid phone number! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";//Phone number validation warning
       }
       else if($spec_mail != 'yahoo.com'){
         $msg = " <p class='alert alert-warning alert-dismissible fade show' role='alert'>The Email Address must be of Yahoo! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";//Specific Email address validation
       }
-      else if($age < 18 && $age > 39){
+      else if($age < 25){
         $msg = " <p class='alert alert-warning alert-dismissible fade show' role='alert'>Only people aged 18 to 39 are allowed to sign in! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";//Specific age category validation
       }
-      else
+      else{        
+        $sql="INSERT INTO users(name, email, cell, age) values ('$name','$email','$cell','$age')"; // Data accept and send
+        $connection->query($sql);
         $msg = "<p class='alert alert-success alert-dismissible fade show' role='alert'>You're good to go! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";//Success validation message
+      }
       }
   ?>
 
     <div class="box mx-auto mt-5">
     <div class="wrap shadow">
+    <a class="btn btn-primary btn-sm" href="index.php">All Users</a><br><br>
       <div class="card bg-info text-light">
         <div class="card-body">
-          <h2>Sign in</h2>
+          <h2>Add New User</h2>
           <?php
             if(isset($msg)){
               echo $msg;
@@ -129,7 +130,7 @@
               ?>
             </div>
             <div class="form-group mt-2">
-              <input name="insert" style="cursor:pointer" class="btn btn-outline-dark" type="submit" value="Sign In">
+              <input name="insert" style="cursor:pointer" class="btn btn-outline-dark" type="submit" value="Add">
             </div>
         </div>
       </div>
