@@ -46,7 +46,7 @@ include_once "autoload.php";
 							<td><?php echo $users_data->email ?></td>
 							<td><?php echo $users_data->cell ?></td>
 							<td><?php echo $users_data->age ?></td>
-							<td><img src="assets/media/img/pp_photo/istockphoto-615279718-612x612.jpg" alt=""></td>
+							<td><img src="assets/media/img/pp_photo/istock" alt=""></td>
 							<td>
 								<a class="btn btn-sm btn-info" href="#">View</a>
 								<a class="btn btn-sm btn-warning" href="#">Edit</a>
