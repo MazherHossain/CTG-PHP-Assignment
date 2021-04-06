@@ -74,7 +74,7 @@ include_once "autoload.php";
         $msg = " <p class='alert alert-warning alert-dismissible fade show' role='alert'>Only people aged 18 to 39 are allowed to sign in! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";//Specific age category validation
       }
       else{        
-        $sql="INSERT INTO users(name, email, cell, age) values ('$name','$email','$cell','$age')"; // Data accept and send
+        $sql="INSERT INTO teachers(name, email, cell, age) values ('$name','$email','$cell','$age')"; // Data accept and send
         $connection->query($sql);
         $msg = "<p class='alert alert-success alert-dismissible fade show' role='alert'>You're good to go! <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";//Success validation message
       }

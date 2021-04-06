@@ -2,6 +2,10 @@
 $host='localhost';
 $user='root';
 $pass='';
-$db='teachers';
-$connection = new mysqli($host,$user,$pass,$db);//Data Base Connection
+$db='crud';
+function connect(){
+  global $host,$user, $pass,$db;
+  return $connection = new mysqli($host,$user,$pass,$db);//Data Base Connection
+}
+
 ?>
