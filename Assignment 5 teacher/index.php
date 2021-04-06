@@ -15,6 +15,7 @@ include_once "autoload.php";
 <body>
 	
 	<?php
+		
 		if(isset($_POST['crud'])){//Get Values from input
 			$name = $_POST['name'];
 			$email = $_POST['email'];
