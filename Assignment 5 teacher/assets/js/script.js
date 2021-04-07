@@ -11,6 +11,7 @@
       let file_url = URL.createObjectURL(e.target.files[0]);
       $('img#preview').attr('src', file_url);
     });//Preview for the photo
+    
 
     
 

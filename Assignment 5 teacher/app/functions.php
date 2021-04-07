@@ -43,4 +43,11 @@ function move($file, $location='/',array $type=['jpg','png','jpeg']){
 function delete($table,$id){
   connect()-> query("DELETE FROM $table WHERE id='$id'");
 }
+//
+//
+//
+function find($table,$id){
+  $data = connect()->query("SELECT * FROM $table WHERE id='$id'");
+  return $data-> fetch_object();
+}
 ?>

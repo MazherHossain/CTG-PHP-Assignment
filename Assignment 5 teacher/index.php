@@ -105,7 +105,7 @@ if(isset($_GET['delete_id'])){//delete data
 							<td><img width="80" src="photos/<?php echo $teacher->photo; ?>" alt=""></td>
 							<td>
 								<a class="btn btn-sm btn-info" href="show.php?show_id=<?php echo $teacher->id?>">View</a>
-								<a class="btn btn-sm btn-warning" href="#">Edit</a>
+								<a class="btn btn-sm btn-warning" href="edit.php?edit_id=<?php echo $teacher->id?>">Edit</a>
 								<a class="btn btn-sm btn-danger delete_btn" href="?delete_id=<?php echo $teacher->id?>&photo=<?php echo $teacher->photo?>">Delete</a>
 							</td>
 						</tr>
@@ -147,7 +147,7 @@ if(isset($_GET['delete_id'])){//delete data
 								<option value="">-select-</option>
 								<option value="Mirpur">Mirpur</option>
 								<option value="Banani">Banani</option>
-								<option value="Mirpur">Mirpur</option>
+								<option value="Badda">Mirpur</option>
 								<option value="Uttara">Uttara</option>
 								<option value="Mohammadpur">Mohammadpur</option>
 								<option value="Bashundhara">Bashundhara</option>
