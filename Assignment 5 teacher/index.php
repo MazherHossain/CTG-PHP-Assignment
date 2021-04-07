@@ -1,5 +1,12 @@
 <?php
 include_once "autoload.php";
+if(isset($_GET['delete_id'])){//delete data
+	$delete_id = $_GET['delete_id'];
+	$photo_name = $_GET['photo'];
+	unlink('photos/'.$photo_name);
+	delete('teachers',$delete_id);
+	header("location:index.php");//solve the issue of re-adding the existing data after each reload
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,12 +32,6 @@ include_once "autoload.php";
 			$age = $_POST['age'];
 			$gender = $_POST['gender'];
 			$department = $_POST['dept'];
-			//File management
-			$file_name = $_FILES['photo']['name'];
-			$file_name_tmp = $_FILES['photo']['tmp_name'];
-			$file_arr = explode('.',$file_name);
-			$file_ext = end($file_arr);
-			$unique_name = md5(time().rand()).'.'.$file_ext;
 			//Form validation
 			if(empty($name) || empty($email) || empty($cell) || empty($username) || empty($location) || empty($age) || empty($gender) || empty($department)){
 				$msg = validate('All fields are required!');
@@ -40,11 +41,19 @@ include_once "autoload.php";
         $msg = validate('Invalid email address!');
 			}
 			else {
-				//Data insert
-				connect() -> query("INSERT INTO teachers(name, email, cell, username, location, age, gender, dept, photo) VALUES ('$name','$email','$cell','$username','$location','$age','$gender','$department','$unique_name')");
 				//Upload profile photo
-				move_uploaded_file($file_name_tmp,'photos/'.$unique_name);
-				$msg = validate('Data inserted!','success');//Success 
+				$data = move($_FILES['photo'],'photos/');
+				$unique_name = $data['unique_name'];
+				$err_msg = $data['err_msg'];
+				if(empty($err_msg)){
+					//Data insert
+				create("INSERT INTO teachers(name, email, cell, username, location, age, gender, dept, photo) VALUES ('$name','$email','$cell','$username','$location','$age','$gender','$department','$unique_name')");
+				$msg = validate('Data inserted!','success');//Success
+				}else{
+					$msg = $err_msg;
+				}
+				
+				
 			}
 		}
 	?>
@@ -90,7 +99,7 @@ include_once "autoload.php";
 							<td>
 								<a class="btn btn-sm btn-info" href="#">View</a>
 								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="#">Delete</a>
+								<a class="btn btn-sm btn-danger" href="?delete_id=<?php echo $teacher->id?>&photo=<?php echo $teacher->photo?>">Delete</a>
 							</td>
 						</tr>
 						<?php endwhile; ?>
