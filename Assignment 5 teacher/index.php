@@ -32,6 +32,7 @@ if(isset($_GET['delete_id'])){//delete data
 			$age = $_POST['age'];
 			$gender = $_POST['gender'];
 			$department = $_POST['dept'];
+			$cell_start = substr($cell, 0, 3);//cell manage
 			//Form validation
 			if(empty($name) || empty($email) || empty($cell) || empty($username) || empty($location) || empty($age) || empty($gender) || empty($department)){
 				$msg = validate('All fields are required!');
@@ -39,6 +40,12 @@ if(isset($_GET['delete_id'])){//delete data
 			}
 			else if(filter_var($email, FILTER_VALIDATE_EMAIL) == false){
         $msg = validate('Invalid email address!');
+			}
+			else if(in_array($cell_start, ['017','018','019','015','013','016','014'])==false){
+        $msg = validate('Invalid phone number sequence','warning');//Phone number validation warning
+      }
+			else if($age < 16 && $age>150){
+        $msg = validate('You didnt follow the age requirement','warning');
 			}
 			else {
 				//Upload profile photo
@@ -59,7 +66,7 @@ if(isset($_GET['delete_id'])){//delete data
 	?>
 	
 
-	<div class="wrap-table w-100 p-3 ">
+	<div class="wrap-table w-100 p-3">
 	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#teacher_modal">
   Add Teacher
 </button><br><br>
@@ -97,9 +104,9 @@ if(isset($_GET['delete_id'])){//delete data
 							<td><?php echo $teacher->age; ?></td>
 							<td><img width="80" src="photos/<?php echo $teacher->photo; ?>" alt=""></td>
 							<td>
-								<a class="btn btn-sm btn-info" href="#">View</a>
+								<a class="btn btn-sm btn-info" href="show.php?show_id=<?php echo $teacher->id?>">View</a>
 								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="?delete_id=<?php echo $teacher->id?>&photo=<?php echo $teacher->photo?>">Delete</a>
+								<a class="btn btn-sm btn-danger delete_btn" href="?delete_id=<?php echo $teacher->id?>&photo=<?php echo $teacher->photo?>">Delete</a>
 							</td>
 						</tr>
 						<?php endwhile; ?>
@@ -192,5 +199,16 @@ if(isset($_GET['delete_id'])){//delete data
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/script.js"></script>
+	<script>
+	$('.delete_btn').click(function(){
+      let conf = confirm('Are you sure?');
+			if(conf==true){
+				return true;
+			}
+			else{
+				return false;
+			}
+    });
+	</script>
 </body>
 </html>

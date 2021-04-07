@@ -1,20 +1,24 @@
 <?php
+//
 //validate function for error message
 function validate($msg, $type='danger'){
   return " <p class='alert alert-$type alert-dismissible fade show' role='alert'>$msg<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' ></button> </p>";
 }
-
-
+//
+//
+//
 function all($table, $order='DESC'){
   return connect()->query("SELECT * FROM $table ORDER BY id $order");
 }//call all the data from a specific table
-
-
+//
+//
+//
 function create($sql){
   connect() -> query($sql);
 }//to send data from database
-
-
+//
+//
+//
 function move($file, $location='/',array $type=['jpg','png','jpeg']){
   //File management
   $file_name = $file['name'];
@@ -33,7 +37,9 @@ function move($file, $location='/',array $type=['jpg','png','jpeg']){
     'err_msg' => $msg
   ];
 }//file upload
-
+//
+//
+//
 function delete($table,$id){
   connect()-> query("DELETE FROM $table WHERE id='$id'");
 }
