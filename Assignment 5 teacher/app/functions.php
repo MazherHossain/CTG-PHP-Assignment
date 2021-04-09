@@ -36,7 +36,7 @@ function move($file, $location='/',array $type=['jpg','png','jpeg']){
     'unique_name' =>  $unique_name,
     'err_msg' => $msg
   ];
-}//file upload
+}
 //
 //
 //
@@ -49,5 +49,27 @@ function delete($table,$id){
 function find($table,$id){
   $data = connect()->query("SELECT * FROM $table WHERE id='$id'");
   return $data-> fetch_object();
+}
+//
+//
+//
+function update($sql){
+  connect()->query($sql);
+}
+//
+//
+//
+function dataCheck($table,$column,$data){
+  $data=connect()->query("SELECT $column FROM $table WHERE $column='$data'");
+  if($data->num_rows>0){
+    return false;
+  }
+  else{
+    return true;
+  }
+  //
+  //
+  //
+  
 }
 ?>

@@ -9,11 +9,10 @@ if(isset($_POST['crud'])){//Get Values from input
   $location = $_POST['location'];
   $age = $_POST['age'];
   $gender = $_POST['gender'];
-  $department = $_POST['dept'];
   $id = $_GET['edit_id'];
   $cell_start = substr($cell, 0, 3);//cell manage
   //Form validation
-  if(empty($name) || empty($email) || empty($cell) || empty($username) || empty($location) || empty($age) || empty($gender) || empty($department)){
+  if(empty($name) || empty($email) || empty($cell) || empty($username) || empty($location) || empty($age) || empty($gender)){
     $msg = validate('All fields are required!');
     //warning for not entering any or all information
   }
@@ -40,15 +39,15 @@ if(isset($_POST['crud'])){//Get Values from input
       $photo_name = $_POST['old_photo'];
     }
     $updated_at=date('Y-m-d g:i:h', time());
-    update("UPDATE teachers SET name='$name',email='$email',cell='$cell',username='$username',location='$location', age='$age',gender='$gender',dept='$department',photo='$photo_name', updated_at='$updated_at' WHERE id='$id'");
-    header('location:index.php');
+    update("UPDATE staffs SET name='$name',email='$email',cell='$cell',username='$username',location='$location', age='$age',gender='$gender',photo='$photo_name', updated_at='$updated_at' WHERE id='$id'");
+    header('location:staff_index.php');
     //$msg = validate('Data updated successfully','success');
   }
 }
 
 if(isset($_GET['edit_id'])){
   $id = $_GET['edit_id'];
-  $edit_data = find('teachers',$id);
+  $edit_data = find('staffs',$id);
 }
 ?>
 
@@ -69,10 +68,10 @@ if(isset($_GET['edit_id'])){
 <div class="container">
   <div class="row">
     <div class="col-lg-6 mx-auto mt-5">
-    <a class="btn btn-primary btn-sm mb-2" href="index.php">Back</a>
+    <a class="btn btn-primary btn-sm mb-2" href="staff_index.php">Back</a>
       <div class="card">
         <div class="card-body">
-        <h2>Teacher Data Edit</h2>
+        <h2>Staff Data Edit</h2>
         <?php
         if(isset($msg)){
           echo $msg;
@@ -81,7 +80,7 @@ if(isset($_GET['edit_id'])){
         <hr>
         <form action="" method="POST" enctype="multipart/form-data">
 						<div class="form-group">
-							<label for="">Teacher Name</label>
+							<label for="">Staff Name</label>
 							<input name="name" class="form-control" value="<?php echo $edit_data->name; ?>" type="text">
 						</div>
 						<div class="form-group mt-2">
@@ -128,28 +127,8 @@ if(isset($_GET['edit_id'])){
               echo ($edit_data->gender=='Female') ? 'checked':'';?> value="Female" id="Female"><label for="Female">Female</label>
 						</div>
 						<div class="form-group mt-2">
-							<label for="">Department</label>
-							<select class="form-select" aria-label=".form-select-sm example" name="dept" id="">
-								<option value="">-select-</option>
-								<option <?php
-                echo ($edit_data->dept=='BBA') ? 'selected':''; ?> value="BBA">BBA</option>
-								<option <?php
-                echo ($edit_data->dept=='EEE') ? 'selected':''; ?> value="EEE">EEE</option>
-								<option <?php
-                echo ($edit_data->dept=='CSE') ? 'selected':''; ?> value="CSE">CSE</option>
-								<option <?php
-                echo ($edit_data->dept=='Economics') ? 'selected':''; ?> value="Economics">Economics</option>
-								<option <?php
-                echo ($edit_data->dept=='English') ? 'selected':''; ?> value="English">English</option>
-								<option <?php
-                echo ($edit_data->dept=='Law') ? 'selected':''; ?> value="Law">Law</option>
-								<option <?php
-                echo ($edit_data->dept=='Architecture') ? 'selected':''; ?>value="Architecture">Architecture</option>
-							</select>
-						</div>
-						<div class="form-group mt-2">
-							<label for="teacher_photo_edit" <div style="cursor:pointer" data-toggle="tooltip" title="Profile Photo" class="pic"><i class="fas fa-images"></i> <img style="width: 100px;" id="new_preview" src="photos/<?php echo $edit_data->photo; ?>" alt=""></div>Teacher Photo</label>
-							<input name="new_photo"style="display:none;" class="form-control" type="file" id="teacher_photo_edit">
+							<label for="staff_photo_edit" <div style="cursor:pointer" data-toggle="tooltip" title="Profile Photo" class="pic"><i class="fas fa-images"></i> <img style="width: 100px;" id="new_preview" src="photos/<?php echo $edit_data->photo; ?>" alt=""></div>Staff Photo</label>
+							<input name="new_photo"style="display:none;" class="form-control" type="file" id="staff_photo_edit">
               <input type="hidden" value="<?php echo $edit_data->photo; ?>" name="old_photo">
 						</div>
 						<div class="form-group mt-2 mb-2 mx-auto">

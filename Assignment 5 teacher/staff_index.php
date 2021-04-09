@@ -4,8 +4,8 @@ if(isset($_GET['delete_id'])){//delete data
 	$delete_id = $_GET['delete_id'];
 	$photo_name = $_GET['photo'];
 	unlink('photos/'.$photo_name);
-	delete('teachers',$delete_id);
-	header("location:index.php");//solve the issue of re-adding the existing data after each reload
+	delete('staffs',$delete_id);
+	header("location:staff_index.php");//solve the issue of re-adding the existing data after each reload
 }
 ?>
 
@@ -13,7 +13,7 @@ if(isset($_GET['delete_id'])){//delete data
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Teacher's Data</title>
+	<title>Staff's Data</title>
 	<!-- ALL CSS FILES  -->
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/fonts/css/all.css">
@@ -31,11 +31,11 @@ if(isset($_GET['delete_id'])){//delete data
 			$location = $_POST['location'];
 			$age = $_POST['age'];
 			$gender = $_POST['gender'];
-			$department = $_POST['dept'];
+			//$department = $_POST['dept'];
 			$cell_start = substr($cell, 0, 3);//cell manage
 		
 			//Form validation
-			if(empty($name) || empty($email) || empty($cell) || empty($username) || empty($location) || empty($age) || empty($gender) || empty($department)){
+			if(empty($name) || empty($email) || empty($cell) || empty($username) || empty($location) || empty($age) || empty($gender)){
 				$msg = validate('All fields are required!');
 				//warning for not entering any or all information
 			}
@@ -48,13 +48,13 @@ if(isset($_GET['delete_id'])){//delete data
 			else if($age < 16 && $age>150){
         $msg = validate('You didnt follow the age requirement','warning');
 			}
-			else if(dataCheck('teachers','email',$email)==false){
+			else if(dataCheck('staffs','email',$email)==false){
 				$msg = validate('Email already exists!','warning');
 			}
-			else if(dataCheck('teachers','username',$username)==false){
+			else if(dataCheck('staffs','username',$username)==false){
 				$msg = validate('Username already exists!','warning');
 			}
-			else if(dataCheck('teachers','cell',$cell)==false){
+			else if(dataCheck('staffs','cell',$cell)==false){
 				$msg = validate('Phone Number already exists!','warning');
 			}
 			else {
@@ -64,12 +64,12 @@ if(isset($_GET['delete_id'])){//delete data
 				$err_msg = $data['err_msg'];
 				if(empty($err_msg)){
 					//Data insert
-				create("INSERT INTO teachers(name, email, cell, username, location, age, gender, dept, photo) VALUES ('$name','$email','$cell','$username','$location','$age','$gender','$department','$unique_name')");
+				create("INSERT INTO staffs(name, email, cell, username, location, age, gender, photo) VALUES ('$name','$email','$cell','$username','$location','$age','$gender','$unique_name')");
 				$msg = validate('Data inserted!','success');//Success
 				}else{
 					$msg = $err_msg;
 				}
-				header('location:index.php');
+				header('location:staff_index.php');
 				
 			}
 		}
@@ -77,8 +77,8 @@ if(isset($_GET['delete_id'])){//delete data
 	
 
 	<div class="wrap-table w-100 p-3">
-	<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#teacher_modal">
-  Add Teacher
+	<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staff_modal">
+  Add Staff
 </button>
 <a class="btn btn-outline-primary" href="mainpage.php">Back</a>
 <br><br>
@@ -111,27 +111,27 @@ if(isset($_GET['delete_id'])){//delete data
 					</thead>
 					<tbody>
 						<?php
-						$data= all('teachers');
+						$data= all('staffs');
 						if(isset($_POST['searchbtn'])){
 							$search = $_POST['search'];
-							$sql="SELECT * FROM teachers WHERE name LIKE '%$search%' OR cell LIKE '%$search%' OR username LIKE '%$search%' OR location='$search'";
+							$sql="SELECT * FROM staffs WHERE name LIKE '%$search%' OR cell LIKE '%$search%' OR username LIKE '%$search%' OR location='$search'";
 							$data = connect()->query($sql);
 						}
 						$i = 1;
-						while($teacher = $data->fetch_object()):
+						while($staff = $data->fetch_object()):
 						?>
 						<tr>
 							<td><?php echo $i; $i++; ?></td>
-							<td><?php echo $teacher->name; ?></td>
-							<td><?php echo $teacher->email; ?></td>
-							<td><?php echo $teacher->cell; ?></td>
-							<td><?php echo $teacher->username; ?></td>
-							<td><?php echo $teacher->age; ?></td>
-							<td><img width="80" src="photos/<?php echo $teacher->photo; ?>" alt=""></td>
+							<td><?php echo $staff->name; ?></td>
+							<td><?php echo $staff->email; ?></td>
+							<td><?php echo $staff->cell; ?></td>
+							<td><?php echo $staff->username; ?></td>
+							<td><?php echo $staff->age; ?></td>
+							<td><img width="80" src="photos/<?php echo $staff->photo; ?>" alt=""></td>
 							<td>
-								<a class="btn btn-sm btn-primary" href="show.php?show_id=<?php echo $teacher->id?>">View</a>
-								<a class="btn btn-sm btn-warning" href="edit.php?edit_id=<?php echo $teacher->id?>">Edit</a>
-								<a class="btn btn-sm btn-danger delete_btn" href="?delete_id=<?php echo $teacher->id?>&photo=<?php echo $teacher->photo?>">Delete</a>
+								<a class="btn btn-sm btn-primary" href="staff_show.php?show_id=<?php echo $staff->id?>">View</a>
+								<a class="btn btn-sm btn-warning" href="staff_edit.php?edit_id=<?php echo $staff->id?>">Edit</a>
+								<a class="btn btn-sm btn-danger delete_btn" href="?delete_id=<?php echo $staff->id?>&photo=<?php echo $staff->photo?>">Delete</a>
 							</td>
 						</tr>
 						<?php endwhile; ?>
@@ -142,16 +142,16 @@ if(isset($_GET['delete_id'])){//delete data
 	</div>
 	<!--Teacher modal-->
 	
-	<div class="modal fade" id="teacher_modal" tabindex="-1" aria-labelledby="teacher_modalLabel" aria-hidden="true">
+	<div class="modal fade" id="staff_modal" tabindex="-1" aria-labelledby="staff_modalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
-				<h3 class="modal-title" id="add_teacher_modal">Add New Teacher</h3>
+				<h3 class="modal-title" id="add_teacher_modal">Add New Staff</h3>
 				</div>
 				<div class="modal-body">
 					<form action="" method="POST" enctype="multipart/form-data">
 						<div class="form-group">
-							<label for="">Teacher Name</label>
+							<label for="">Staff Name</label>
 							<input name="name" class="form-control" type="text">
 						</div>
 						<div class="form-group mt-2">
@@ -202,12 +202,12 @@ if(isset($_GET['delete_id'])){//delete data
 							</select>
 						</div>
 						<div class="form-group mt-2">
-							<label for="teacher_photo" <div style="cursor:pointer" data-toggle="tooltip" title="Profile Photo" class="pic"><i class="fas fa-images"></i> <img style="width: 100px;" id="preview" src="" alt=""></div>Teacher Photo</label>
-							<input name="photo"style="display:none;" class="form-control" type="file" id="teacher_photo">
+							<label for="staff_photo" <div style="cursor:pointer" data-toggle="tooltip" title="Profile Photo" class="pic"><i class="fas fa-images"></i> <img style="width: 100px;" id="preview" src="" alt=""></div>Staff Photo</label>
+							<input name="photo"style="display:none;" class="form-control" type="file" id="staff_photo">
 						</div>
 						<div class="form-group mt-2 mb-2 mx-auto">
 							<label for=""></label>
-							<input name="crud" class="btn btn-primary" type="submit" value="add teacher">
+							<input name="crud" class="btn btn-primary" type="submit" value="add staff">
 						</div>
 					</form>
 				</div>
