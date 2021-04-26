@@ -1,0 +1,16 @@
+.bod{
+  width: 250px;
+  height: 100px;
+}
+
+.shw{
+  width: 300px;
+  height: 300px;
+  display: block;
+  margin: auto;
+  border-radius: 50%;
+  border: 10px solid white;
+}
+.pic{
+  font-size:50px;
+}
