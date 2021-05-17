@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2021 at 04:12 PM
+-- Generation Time: May 17, 2021 at 11:46 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -46,7 +46,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `phone`, `password`, `photo`, `status`, `trash`, `created_at`, `updated_at`) VALUES
-(6, 'Mazher', 'mazher_hossain', 'hossainmazher@gmail.com', '01703723146', '$2y$10$jXUwEZvsgvzOg1pB.ftRLONwXZJrdd7WTcpkQsmkpa.GyHhH7oV7m', '437d886873ced9ff61d80c99fb1b46dc.jpg', 1, 0, '2021-05-13 06:46:55', NULL);
+(6, 'Mazher', 'mazher_hossain', 'hossainmazher@gmail.com', '01703723146', '$2y$10$jXUwEZvsgvzOg1pB.ftRLONwXZJrdd7WTcpkQsmkpa.GyHhH7oV7m', '437d886873ced9ff61d80c99fb1b46dc.jpg', 1, 0, '2021-05-13 06:46:55', NULL),
+(7, 'Monica', 'monica_b', 'monica@gmail.com', '01703723147', '$2y$10$DcEy1VsT8nrGDvui1sCCRuNklSQZZFSghbkpg7273hEtu0zkPXHkq', '45447644ccee06c48808782d99ce5d96.jpg', 1, 0, '2021-05-18 03:31:45', NULL),
+(8, 'Batman', 'batman_g', 'batman@gmail.com', '01703723148', '$2y$10$WfdsuUnO4gzCYrIP6C1sKesf9YRKyyaVkr/SasQyJuOA.EeQs3LdS', '7b41a691be5ba6e5db09ec2c7463588c.jpg', 1, 0, '2021-05-18 03:32:16', NULL);
 
 --
 -- Indexes for dumped tables
@@ -66,7 +68,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

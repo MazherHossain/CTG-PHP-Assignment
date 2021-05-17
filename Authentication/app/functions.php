@@ -72,4 +72,8 @@ function dataCheck($table,$column,$data){
   //
   
 }
+//Login User Data
+function loginUserInfo($id){
+  return find('users',$id);
+}
 ?>

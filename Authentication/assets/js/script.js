@@ -17,7 +17,8 @@
       e.preventDefault();
       let name=$('#user_reg_form input[name="name"]').val();
       let username=$('#user_reg_form input[name="username"]').val();
-      let email=$('#user_reg_form input[name="email"]').val();let phone=$('#user_reg_form input[name="phone"]').val();
+      let email=$('#user_reg_form input[name="email"]').val();
+      let phone=$('#user_reg_form input[name="phone"]').val();
       let password=$('#user_reg_form input[name="pass"]').val();
       if(name=='' || username==''|| email=='' || phone=='' || password==''){
         $('.msg').html(validate('All fields are required!'));

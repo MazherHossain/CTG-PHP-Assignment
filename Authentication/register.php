@@ -1,4 +1,11 @@
-<?php include_once "templates/header.php"; ?>
+<?php 
+include_once "templates/header.php";
+include "autoload.php"; 
+	//check user login
+	if(isset($_SESSION['login_status']) AND $_SESSION['login_status']==true){
+		header('location:profile.php');
+	}
+?>
 		<div class="card w-25 mx-auto mt-5">
 			<div class="card-body">
 				<h2>Create Your Account</h2>
