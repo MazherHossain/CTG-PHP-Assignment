@@ -72,10 +72,10 @@
 
 <div class="row">
 	<?php
-		$recent_logout_id=json_decode($_COOKIE['recent_logged_in_users']); 
+		if(isset($_COOKIE['recent_logged_in_users'])):
+		$recent_logout_id=json_decode($_COOKIE['recent_logged_in_users']);
 		$user_id = implode(',',$recent_logout_id);
 		$data= connect() -> query("SELECT * FROM users WHERE id IN ($user_id)");
-
 		while($user_data=$data->fetch_object()):
 	?>
 	<div class="col-md-4 my-3">
@@ -88,7 +88,9 @@
 			</div>
 		</div>
 	</div>
-	<?php endwhile; ?>
+	<?php endwhile; 
+		endif;
+	?>
 
 
 </div></>
